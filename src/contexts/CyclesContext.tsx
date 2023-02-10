@@ -68,9 +68,12 @@ export function CyclesContextProvider({
 
   // salvando informações no storage
   useEffect(() => {
-    const stateJSON = JSON.stringify(cyclesState)
-
-    localStorage.setItem('@ignite-timer:cycles-state-1.0.0', stateJSON)
+    try {
+      const stateJSON = JSON.stringify(cyclesState)
+      localStorage.setItem('@ignite-timer:cycles-state-1.0.0', stateJSON)
+    } catch (error) {
+      console.error('Error while trying to store data in local storage', error)
+    }
   }, [cyclesState])
 
   function setSecondsPassed(seconds: number) {
