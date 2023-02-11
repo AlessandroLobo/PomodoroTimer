@@ -4,21 +4,21 @@ import {
   useState,
   useReducer,
   useEffect,
-} from 'react'
-import { Cycle, cyclesReducer } from '../reducers/cycles/reducer'
+} from "react"
+import { Cycle, cyclesReducer } from "../reducers/cycles/reducer"
 import {
   ActionTypes,
   addNewCycleAction,
   interruptCurrentCycleAction,
   markCurrentCycleAsFinishedAction,
-} from '../reducers/cycles/actions'
-import { differenceInSeconds } from 'date-fns'
+} from "../reducers/cycles/actions"
+import { differenceInSeconds } from "date-fns"
 
 interface CreateCycleData {
   task: string
   minutesAmount: number
 }
-
+// Criando interface
 interface CyclesContextType {
   cycles: Cycle[]
   activeCycle: Cycle | undefined
@@ -47,12 +47,12 @@ export function CyclesContextProvider({
     },
     () => {
       const storedStateAsJSON = localStorage.getItem(
-        '@ignite-timer:cycles-state-1.0.0',
+        "@ignite-timer:cycles-state-1.0.0"
       )
       if (storedStateAsJSON) {
         return JSON.parse(storedStateAsJSON)
       }
-    },
+    }
   )
 
   const { cycles, activeCycleId } = cyclesState
@@ -70,9 +70,9 @@ export function CyclesContextProvider({
   useEffect(() => {
     try {
       const stateJSON = JSON.stringify(cyclesState)
-      localStorage.setItem('@ignite-timer:cycles-state-1.0.0', stateJSON)
+      localStorage.setItem("@ignite-timer:cycles-state-1.0.0", stateJSON)
     } catch (error) {
-      console.error('Error while trying to store data in local storage', error)
+      console.error("Error while trying to store data in local storage", error)
     }
   }, [cyclesState])
 
